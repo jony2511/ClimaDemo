@@ -158,13 +158,24 @@ class LibraryViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let song = songs[indexPath.row]
-            LibraryManager.shared.deleteSong(song)
-            songs.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let didDelete = LibraryManager.shared.deleteSong(song)
 
-            if songs.isEmpty {
-                emptyLabel.isHidden = false
-                tableView.isHidden = true
+            if didDelete {
+                songs.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+
+                if songs.isEmpty {
+                    emptyLabel.isHidden = false
+                    tableView.isHidden = true
+                }
+            } else {
+                let alert = UIAlertController(
+                    title: "Delete Failed",
+                    message: "The song could not be removed. Please try again.",
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                present(alert, animated: true)
             }
         }
     }

@@ -23,6 +23,13 @@ class LogInViewController: UIViewController {
         passwordTextField.isSecureTextEntry = true
         // Do any additional setup after loading the view.
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        Utilities.styleTextField(emailTextField)
+        Utilities.styleTextField(passwordTextField)
+    }
+
     func setUpElements ()
     {
         errorLabel.alpha = 0

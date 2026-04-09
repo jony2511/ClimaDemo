@@ -69,16 +69,38 @@ final class LibraryManager {
         }
     }
 
-    func deleteSong(_ song: Song) {
+    @discardableResult
+    func deleteSong(_ song: Song) -> Bool {
+        var fileDeletedSuccessfully = true
+
         if let localFileName = song.localFileName,
            let url = localFileURL(fileName: localFileName),
            FileManager.default.fileExists(atPath: url.path) {
-            try? FileManager.default.removeItem(at: url)
+            do {
+                try FileManager.default.removeItem(at: url)
+            } catch {
+                print("Error deleting local song file: \(error.localizedDescription)")
+                fileDeletedSuccessfully = false
+            }
         }
 
         var songs = fetchSongs()
-        songs.removeAll { $0.trackName == song.trackName && $0.localFileName == song.localFileName }
+        let initialCount = songs.count
+
+        if let localFileName = song.localFileName {
+            songs.removeAll { $0.localFileName == localFileName }
+        } else {
+            songs.removeAll {
+                $0.trackName == song.trackName &&
+                $0.name == song.name &&
+                $0.artistName == song.artistName
+            }
+        }
+
+        let metadataRemoved = songs.count < initialCount
         saveSongs(songs)
+
+        return fileDeletedSuccessfully && metadataRemoved
     }
 
     func localFileURL(fileName: String) -> URL? {

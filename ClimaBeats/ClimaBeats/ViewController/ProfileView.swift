@@ -62,15 +62,6 @@ class ProfileViewController: UIViewController {
         backButton.frame = CGRect(x: 16, y: 60, width: 80, height: 40)
         backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         view.addSubview(backButton)
-
-        // Library button
-        let libraryButton = UIButton(type: .system)
-        libraryButton.setTitle("📚 Library", for: .normal)
-        libraryButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 16)
-        libraryButton.tintColor = UIColor(red: 30/255, green: 10/255, blue: 87/255, alpha: 1)
-        libraryButton.frame = CGRect(x: screenWidth - 120, y: 60, width: 110, height: 40)
-        libraryButton.addTarget(self, action: #selector(libraryTapped), for: .touchUpInside)
-        view.addSubview(libraryButton)
         
         // Title
         let titleLabel = UILabel()
@@ -124,6 +115,31 @@ class ProfileViewController: UIViewController {
         logoutButton.frame = CGRect(x: 40, y: 470, width: screenWidth - 80, height: 50)
         logoutButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
         view.addSubview(logoutButton)
+
+        // Bottom quick actions (only place for Library/Favorites)
+        let libraryButton = UIButton(type: .system)
+        libraryButton.setTitle("Library", for: .normal)
+        libraryButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
+        libraryButton.tintColor = UIColor(red: 30/255, green: 10/255, blue: 87/255, alpha: 1)
+        libraryButton.frame = CGRect(x: 20, y: view.frame.size.height - 80, width: 140, height: 40)
+        libraryButton.backgroundColor = .white
+        libraryButton.layer.cornerRadius = 20
+        libraryButton.layer.borderWidth = 1.5
+        libraryButton.layer.borderColor = UIColor(red: 30/255, green: 10/255, blue: 87/255, alpha: 1).cgColor
+        libraryButton.addTarget(self, action: #selector(libraryTapped), for: .touchUpInside)
+        view.addSubview(libraryButton)
+
+        let favoritesButton = UIButton(type: .system)
+        favoritesButton.setTitle("Favorites", for: .normal)
+        favoritesButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
+        favoritesButton.tintColor = UIColor(red: 30/255, green: 10/255, blue: 87/255, alpha: 1)
+        favoritesButton.frame = CGRect(x: screenWidth - 160, y: view.frame.size.height - 80, width: 140, height: 40)
+        favoritesButton.backgroundColor = .white
+        favoritesButton.layer.cornerRadius = 20
+        favoritesButton.layer.borderWidth = 1.5
+        favoritesButton.layer.borderColor = UIColor(red: 30/255, green: 10/255, blue: 87/255, alpha: 1).cgColor
+        favoritesButton.addTarget(self, action: #selector(favoritesTapped), for: .touchUpInside)
+        view.addSubview(favoritesButton)
     }
     
     func loadUserData() {
@@ -188,5 +204,11 @@ class ProfileViewController: UIViewController {
         let libraryVC = LibraryViewController()
         libraryVC.modalPresentationStyle = .fullScreen
         present(libraryVC, animated: true)
+    }
+
+    @objc func favoritesTapped() {
+        let favoritesVC = FavoritesViewController()
+        favoritesVC.modalPresentationStyle = .fullScreen
+        present(favoritesVC, animated: true)
     }
 }

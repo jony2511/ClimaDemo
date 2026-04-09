@@ -48,15 +48,6 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
         backButton.frame = CGRect(x: 16, y: 60, width: 80, height: 40)
         backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         view.addSubview(backButton)
-
-        // Library button
-        let libraryButton = UIButton(type: .system)
-        libraryButton.setTitle("📚 Library", for: .normal)
-        libraryButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 16)
-        libraryButton.tintColor = UIColor(red: 30/255, green: 10/255, blue: 87/255, alpha: 1)
-        libraryButton.frame = CGRect(x: view.frame.size.width - 120, y: 60, width: 110, height: 40)
-        libraryButton.addTarget(self, action: #selector(libraryTapped), for: .touchUpInside)
-        view.addSubview(libraryButton)
         
         // Table view
         tableView.frame = CGRect(x: 0, y: 110, width: view.frame.size.width, height: view.frame.size.height - 110)
@@ -140,11 +131,5 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @objc func backTapped() {
         dismiss(animated: true)
-    }
-
-    @objc func libraryTapped() {
-        let libraryVC = LibraryViewController()
-        libraryVC.modalPresentationStyle = .fullScreen
-        present(libraryVC, animated: true)
     }
 }

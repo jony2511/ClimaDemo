@@ -59,6 +59,13 @@
 		40F27BCF2B14B29A0042D2F3 /* song1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40F27BC52B14B2980042D2F3 /* song1.mp3 */; };
 		40F27BD12B14B29A0042D2F3 /* song2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40F27BC72B14B2990042D2F3 /* song2.mp3 */; };
 		40F27BD32B14B29A0042D2F3 /* song3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40F27BC92B14B29A0042D2F3 /* song3.mp3 */; };
+		AC1000012F53B00000000001 /* song5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000012F53B00000000001 /* song5.mp3 */; };
+		AC1000022F53B00000000002 /* song6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000022F53B00000000002 /* song6.mp3 */; };
+		AC1000032F53B00000000003 /* song7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000032F53B00000000003 /* song7.mp3 */; };
+		AC1000042F53B00000000004 /* song8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000042F53B00000000004 /* song8.mp3 */; };
+		AC1000052F53B00000000005 /* song9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000052F53B00000000005 /* song9.mp3 */; };
+		AC1000062F53B00000000006 /* song10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000062F53B00000000006 /* song10.mp3 */; };
+		AC1000072F53B00000000007 /* song13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000072F53B00000000007 /* song13.mp3 */; };
 		842C8EED2F5392AF002FBC1E /* song4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 842C8EEC2F5392AF002FBC1E /* song4.mp3 */; };
 		AA0000012F53A00000000001 /* SongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000022F53A00000000001 /* SongModel.swift */; };
 		AA0000032F53A00000000002 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000042F53A00000000002 /* FavoritesManager.swift */; };
@@ -115,6 +122,13 @@
 		40F27BC52B14B2980042D2F3 /* song1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song1.mp3; sourceTree = "<group>"; };
 		40F27BC72B14B2990042D2F3 /* song2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song2.mp3; sourceTree = "<group>"; };
 		40F27BC92B14B29A0042D2F3 /* song3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song3.mp3; sourceTree = "<group>"; };
+		AC2000012F53B00000000001 /* song5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song5.mp3; sourceTree = "<group>"; };
+		AC2000022F53B00000000002 /* song6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song6.mp3; sourceTree = "<group>"; };
+		AC2000032F53B00000000003 /* song7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song7.mp3; sourceTree = "<group>"; };
+		AC2000042F53B00000000004 /* song8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song8.mp3; sourceTree = "<group>"; };
+		AC2000052F53B00000000005 /* song9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song9.mp3; sourceTree = "<group>"; };
+		AC2000062F53B00000000006 /* song10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song10.mp3; sourceTree = "<group>"; };
+		AC2000072F53B00000000007 /* song13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song13.mp3; sourceTree = "<group>"; };
 		842C8EEC2F5392AF002FBC1E /* song4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song4.mp3; sourceTree = "<group>"; };
 		AA0000022F53A00000000001 /* SongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongModel.swift; sourceTree = "<group>"; };
 		AA0000042F53A00000000002 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
@@ -214,8 +228,15 @@
 				40F27BC72B14B2990042D2F3 /* song2.mp3 */,
 				40F27BC92B14B29A0042D2F3 /* song3.mp3 */,
 				842C8EEC2F5392AF002FBC1E /* song4.mp3 */,
+				AC2000012F53B00000000001 /* song5.mp3 */,
+				AC2000022F53B00000000002 /* song6.mp3 */,
+				AC2000032F53B00000000003 /* song7.mp3 */,
+				AC2000042F53B00000000004 /* song8.mp3 */,
+				AC2000052F53B00000000005 /* song9.mp3 */,
+				AC2000062F53B00000000006 /* song10.mp3 */,
 				404F12D82B148C3600DDD0F5 /* song11.mp3 */,
 				404F12DA2B148C3600DDD0F5 /* song12.mp3 */,
+				AC2000072F53B00000000007 /* song13.mp3 */,
 				40DDA6AA2B0219F5009B1F57 /* Helpers */,
 				40EF74682B00A35600EA61DA /* ViewController */,
 				40EF73FF2B009B5E00EA61DA /* Main.storyboard */,
@@ -255,13 +276,13 @@
 			children = (
 				40EF73FD2B009B5E00EA61DA /* LandingView.swift */,
 				40EF74622B00A30100EA61DA /* SignUpView.swift */,
-				40EF74642B00A31C00EA61DA /* LoginView.swift */,
 				40EF74662B00A32C00EA61DA /* HomeView.swift */,
 				400D092C2B04D5D800A9E7E6 /* PlayerView.swift */,
 				40469C462B0F5BB100AF1EA9 /* WeatherView.swift */,
 				AA0000062F53A00000000003 /* FavoritesView.swift */,
 				AA0000082F53A00000000004 /* ProfileView.swift */,
 				AB0000042F53A00000000006 /* LibraryView.swift */,
+				40EF74642B00A31C00EA61DA /* LoginView.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -404,10 +425,17 @@
 			files = (
 				842C8EED2F5392AF002FBC1E /* song4.mp3 in Resources */,
 				404F12E22B148C3600DDD0F5 /* song11.mp3 in Resources */,
+				AC1000022F53B00000000002 /* song6.mp3 in Resources */,
+				AC1000052F53B00000000005 /* song9.mp3 in Resources */,
 				40F27BD12B14B29A0042D2F3 /* song2.mp3 in Resources */,
+				AC1000072F53B00000000007 /* song13.mp3 in Resources */,
+				AC1000032F53B00000000003 /* song7.mp3 in Resources */,
+				AC1000042F53B00000000004 /* song8.mp3 in Resources */,
 				40F27BCF2B14B29A0042D2F3 /* song1.mp3 in Resources */,
+				AC1000062F53B00000000006 /* song10.mp3 in Resources */,
 				40EF74062B009B6100EA61DA /* LaunchScreen.storyboard in Resources */,
 				40F27BD32B14B29A0042D2F3 /* song3.mp3 in Resources */,
+				AC1000012F53B00000000001 /* song5.mp3 in Resources */,
 				40EF742A2B00A08300EA61DA /* GoogleService-Info.plist in Resources */,
 				404F12E42B148C3600DDD0F5 /* song12.mp3 in Resources */,
 				40EF74032B009B6100EA61DA /* Assets.xcassets in Resources */,
@@ -944,5 +972,3 @@
 	};
 	rootObject = 40EF73EE2B009B5E00EA61DA /* Project object */;
 }
-
-
