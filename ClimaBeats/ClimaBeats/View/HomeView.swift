@@ -6,7 +6,6 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseFirestore
 
 class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
@@ -15,8 +14,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     @IBOutlet var table: UITableView!
     var receivedWeatherData: WeatherData? // Property to hold received WeatherData
     var songs = [Song]()
-    private let db = Firestore.firestore()
-    private var currentModeKey: String = "chill"
+    private let viewModel = HomePlaylistViewModel()
     
     
     @IBOutlet weak var weather: UIButton!
@@ -25,7 +23,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         super.viewDidLoad()
         let conditionText = receivedWeatherData?.current.condition.text ?? "Unknown"
         songss.text = conditionText
-        currentModeKey = modeKey(for: conditionText)
+        viewModel.updateMode(from: conditionText)
        
         table.delegate = self
         table.dataSource = self
@@ -217,12 +215,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
             alert.addAction(UIAlertAction(title: librarySong.name, style: .default, handler: { [weak self] _ in
                 guard let self else { return }
 
-                let exists = self.songs.contains(where: {
-                    if let lhs = $0.localFileName, let rhs = librarySong.localFileName {
-                        return lhs == rhs
-                    }
-                    return $0.trackName == librarySong.trackName
-                })
+                let exists = self.viewModel.isDuplicate(librarySong, in: self.songs)
 
                 if exists {
                     let duplicateAlert = UIAlertController(title: "Already Added", message: "This song is already in the current mode playlist.", preferredStyle: .alert)
@@ -251,7 +244,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     @objc func resetCurrentModePlaylistTapped() {
         let alert = UIAlertController(
             title: "Reset Playlist",
-            message: "Reset this \(currentModeKey.capitalized) mode playlist to default songs?",
+            message: "Reset this \(viewModel.currentModeKey.capitalized) mode playlist to default songs?",
             preferredStyle: .alert
         )
 
@@ -264,150 +257,29 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
 
     private func modeKey(for conditionText: String) -> String {
-        let condition = conditionText.lowercased()
-        if condition.contains("sunny") || condition.contains("clear") {
-            return "energetic"
-        } else if condition.contains("partly cloudy") || condition.contains("cloudy") || condition.contains("overcast") {
-            return "chill"
-        } else if condition.contains("thunder") || condition.contains("heavy rain") {
-            return "intense"
-        } else if condition.contains("rain") || condition.contains("drizzle") || condition.contains("sleet") {
-            return "melancholic"
-        } else if condition.contains("snow") || condition.contains("blizzard") || condition.contains("ice") || condition.contains("freezing") {
-            return "cozy"
-        } else if condition.contains("fog") || condition.contains("mist") || condition.contains("haze") {
-            return "mysterious"
-        }
-        return "chill"
+        return viewModel.modeKey(for: conditionText)
     }
 
     private func defaultSongs(for modeKey: String) -> [Song] {
-        var defaults: [Song] = []
-
-        switch modeKey {
-        case "energetic":
-            defaults.append(Song(name: "Ninth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song9"))
-            defaults.append(Song(name: "Tenth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song10"))
-            defaults.append(Song(name: "Eleventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song11"))
-            defaults.append(Song(name: "Fourth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song4"))
-            defaults.append(Song(name: "Fifth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song5"))
-            defaults.append(Song(name: "Sixth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song6"))
-            defaults.append(Song(name: "Seventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song7"))
-            defaults.append(Song(name: "Eighth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song8"))
-        case "intense":
-            defaults.append(Song(name: "Sixth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song6"))
-            defaults.append(Song(name: "Seventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song7"))
-            defaults.append(Song(name: "Tenth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song10"))
-            defaults.append(Song(name: "Fifth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song5"))
-            defaults.append(Song(name: "Fifth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song5"))
-            defaults.append(Song(name: "Fourth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song4"))
-        case "melancholic":
-            defaults.append(Song(name: "Ninth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song9"))
-            defaults.append(Song(name: "Tenth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song10"))
-            defaults.append(Song(name: "Eleventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song11"))
-            defaults.append(Song(name: "Twelfth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song12"))
-            defaults.append(Song(name: "Second Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song2"))
-            defaults.append(Song(name: "Fourth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song4"))
-            defaults.append(Song(name: "Fifth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song5"))
-        case "cozy":
-            defaults.append(Song(name: "First Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song1"))
-            defaults.append(Song(name: "Third Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song3"))
-            defaults.append(Song(name: "Eighth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song8"))
-            defaults.append(Song(name: "Seventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song7"))
-            defaults.append(Song(name: "Eleventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song11"))
-            defaults.append(Song(name: "Twelfth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song12"))
-        case "mysterious":
-            defaults.append(Song(name: "Eighth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song8"))
-            defaults.append(Song(name: "Seventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song7"))
-            defaults.append(Song(name: "Sixth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song6"))
-            defaults.append(Song(name: "Second Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song2"))
-            defaults.append(Song(name: "Ninth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song9"))
-            defaults.append(Song(name: "Tenth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song10"))
-        default:
-            defaults.append(Song(name: "Fourth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song4"))
-            defaults.append(Song(name: "Ninth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song9"))
-            defaults.append(Song(name: "Tenth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song10"))
-            defaults.append(Song(name: "Eleventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song11"))
-            defaults.append(Song(name: "Twelfth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song12"))
-            defaults.append(Song(name: "First Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song1"))
-            defaults.append(Song(name: "Third Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song3"))
-        }
-
-        return defaults
+        return viewModel.defaultSongs(for: modeKey)
     }
 
     private func loadPlaylistForCurrentMode() {
-        guard let uid = Auth.auth().currentUser?.uid else {
-            songs = defaultSongs(for: currentModeKey)
-            table.reloadData()
-            return
+        viewModel.loadPlaylist { [weak self] loadedSongs in
+            self?.songs = loadedSongs
+            self?.table.reloadData()
         }
-
-        db.collection("users")
-            .document(uid)
-            .collection("modePlaylists")
-            .document(currentModeKey)
-            .getDocument { [weak self] document, error in
-                guard let self else { return }
-
-                if let error = error {
-                    print("Error loading mode playlist: \(error.localizedDescription)")
-                    self.songs = self.defaultSongs(for: self.currentModeKey)
-                    self.table.reloadData()
-                    return
-                }
-
-                if let data = document?.data(),
-                   let songDicts = data["songs"] as? [[String: Any]] {
-                    let parsedSongs = songDicts.compactMap { Song.fromDictionary($0) }
-                    self.songs = parsedSongs.isEmpty ? self.defaultSongs(for: self.currentModeKey) : parsedSongs
-                } else {
-                    self.songs = self.defaultSongs(for: self.currentModeKey)
-                }
-
-                self.table.reloadData()
-            }
     }
 
     private func saveCurrentModePlaylist() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-
-        let payload: [String: Any] = [
-            "mode": currentModeKey,
-            "songs": songs.map { $0.toDictionary() },
-            "updatedAt": FieldValue.serverTimestamp()
-        ]
-
-        db.collection("users")
-            .document(uid)
-            .collection("modePlaylists")
-            .document(currentModeKey)
-            .setData(payload, merge: true) { error in
-                if let error = error {
-                    print("Error saving mode playlist: \(error.localizedDescription)")
-                }
-            }
+        viewModel.savePlaylist(songs)
     }
 
     private func resetCurrentModePlaylistToDefault() {
-        songs = defaultSongs(for: currentModeKey)
-        table.reloadData()
-
-        guard let uid = Auth.auth().currentUser?.uid else {
-            return
+        viewModel.resetPlaylist { [weak self] defaultSongs in
+            self?.songs = defaultSongs
+            self?.table.reloadData()
         }
-
-        db.collection("users")
-            .document(uid)
-            .collection("modePlaylists")
-            .document(currentModeKey)
-            .delete { [weak self] error in
-                if let error = error {
-                    print("Error deleting custom mode playlist: \(error.localizedDescription)")
-                    // Fallback: store defaults explicitly if document delete fails.
-                    self?.saveCurrentModePlaylist()
-                }
-            }
     }
     
     @objc func profileTapped() {

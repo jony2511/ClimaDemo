@@ -6,10 +6,10 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
 
 class ProfileViewController: UIViewController {
+
+    private let viewModel = ProfileViewModel()
     
     private let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -143,36 +143,25 @@ class ProfileViewController: UIViewController {
     }
     
     func loadUserData() {
-        guard let user = Auth.auth().currentUser else { return }
-        emailLabel.text = user.email
-        
-        // Fetch name from Firestore
-        let db = Firestore.firestore()
-        db.collection("users").whereField("uid", isEqualTo: user.uid).getDocuments { [weak self] snapshot, error in
-            if let document = snapshot?.documents.first {
-                let firstName = document.data()["firstname"] as? String ?? ""
-                let lastName = document.data()["lastname"] as? String ?? ""
-                self?.nameLabel.text = "\(firstName) \(lastName)"
-            } else {
-                self?.nameLabel.text = "User"
-            }
+        viewModel.loadProfile { [weak self] profile in
+            self?.emailLabel.text = profile.email
+            self?.nameLabel.text = profile.fullName.isEmpty ? "User" : profile.fullName
         }
     }
     
     func loadFavoritesCount() {
-        FavoritesManager.shared.fetchFavorites { [weak self] songs in
-            self?.favCountLabel.text = "❤️ \(songs.count) Favorite Song\(songs.count == 1 ? "" : "s")"
+        viewModel.loadFavoritesCount { [weak self] count in
+            self?.favCountLabel.text = "❤️ \(count) Favorite Song\(count == 1 ? "" : "s")"
         }
     }
     
     @objc func resetPasswordTapped() {
-        guard let email = Auth.auth().currentUser?.email else { return }
-        
-        Auth.auth().sendPasswordReset(withEmail: email) { [weak self] error in
+        viewModel.resetPassword { [weak self] result in
             let alert: UIAlertController
-            if let error = error {
+            switch result {
+            case .failure(let error):
                 alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-            } else {
+            case .success(let email):
                 alert = UIAlertController(title: "Success", message: "Password reset email sent to \(email)", preferredStyle: .alert)
             }
             alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -182,7 +171,7 @@ class ProfileViewController: UIViewController {
     
     @objc func logoutTapped() {
         do {
-            try Auth.auth().signOut()
+            try viewModel.signOut()
             // Go back to root landing screen
             if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                let window = windowScene.windows.first {

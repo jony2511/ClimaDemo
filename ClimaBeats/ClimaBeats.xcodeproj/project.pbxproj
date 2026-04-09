@@ -59,13 +59,6 @@
 		40F27BCF2B14B29A0042D2F3 /* song1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40F27BC52B14B2980042D2F3 /* song1.mp3 */; };
 		40F27BD12B14B29A0042D2F3 /* song2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40F27BC72B14B2990042D2F3 /* song2.mp3 */; };
 		40F27BD32B14B29A0042D2F3 /* song3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 40F27BC92B14B29A0042D2F3 /* song3.mp3 */; };
-		AC1000012F53B00000000001 /* song5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000012F53B00000000001 /* song5.mp3 */; };
-		AC1000022F53B00000000002 /* song6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000022F53B00000000002 /* song6.mp3 */; };
-		AC1000032F53B00000000003 /* song7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000032F53B00000000003 /* song7.mp3 */; };
-		AC1000042F53B00000000004 /* song8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000042F53B00000000004 /* song8.mp3 */; };
-		AC1000052F53B00000000005 /* song9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000052F53B00000000005 /* song9.mp3 */; };
-		AC1000062F53B00000000006 /* song10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000062F53B00000000006 /* song10.mp3 */; };
-		AC1000072F53B00000000007 /* song13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000072F53B00000000007 /* song13.mp3 */; };
 		842C8EED2F5392AF002FBC1E /* song4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 842C8EEC2F5392AF002FBC1E /* song4.mp3 */; };
 		AA0000012F53A00000000001 /* SongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000022F53A00000000001 /* SongModel.swift */; };
 		AA0000032F53A00000000002 /* FavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000042F53A00000000002 /* FavoritesManager.swift */; };
@@ -73,6 +66,21 @@
 		AA0000072F53A00000000004 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000082F53A00000000004 /* ProfileView.swift */; };
 		AB0000012F53A00000000005 /* LibraryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000022F53A00000000005 /* LibraryManager.swift */; };
 		AB0000032F53A00000000006 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0000042F53A00000000006 /* LibraryView.swift */; };
+		AC1000012F53B00000000001 /* song5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000012F53B00000000001 /* song5.mp3 */; };
+		AC1000022F53B00000000002 /* song6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000022F53B00000000002 /* song6.mp3 */; };
+		AC1000032F53B00000000003 /* song7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000032F53B00000000003 /* song7.mp3 */; };
+		AC1000042F53B00000000004 /* song8.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000042F53B00000000004 /* song8.mp3 */; };
+		AC1000052F53B00000000005 /* song9.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000052F53B00000000005 /* song9.mp3 */; };
+		AC1000062F53B00000000006 /* song10.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000062F53B00000000006 /* song10.mp3 */; };
+		AC1000072F53B00000000007 /* song13.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AC2000072F53B00000000007 /* song13.mp3 */; };
+		AD1000012F53C00000000001 /* LandingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000012F53C00000000001 /* LandingViewModel.swift */; };
+		AD1000022F53C00000000002 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000022F53C00000000002 /* LoginViewModel.swift */; };
+		AD1000032F53C00000000003 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000032F53C00000000003 /* SignUpViewModel.swift */; };
+		AD1000042F53C00000000004 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000042F53C00000000004 /* WeatherViewModel.swift */; };
+		AD1000052F53C00000000005 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000052F53C00000000005 /* FavoritesViewModel.swift */; };
+		AD1000062F53C00000000006 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000062F53C00000000006 /* LibraryViewModel.swift */; };
+		AD1000072F53C00000000007 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000072F53C00000000007 /* ProfileViewModel.swift */; };
+		AD1000082F53C00000000008 /* HomePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000082F53C00000000008 /* HomePlaylistViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,13 +130,6 @@
 		40F27BC52B14B2980042D2F3 /* song1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song1.mp3; sourceTree = "<group>"; };
 		40F27BC72B14B2990042D2F3 /* song2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song2.mp3; sourceTree = "<group>"; };
 		40F27BC92B14B29A0042D2F3 /* song3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song3.mp3; sourceTree = "<group>"; };
-		AC2000012F53B00000000001 /* song5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song5.mp3; sourceTree = "<group>"; };
-		AC2000022F53B00000000002 /* song6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song6.mp3; sourceTree = "<group>"; };
-		AC2000032F53B00000000003 /* song7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song7.mp3; sourceTree = "<group>"; };
-		AC2000042F53B00000000004 /* song8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song8.mp3; sourceTree = "<group>"; };
-		AC2000052F53B00000000005 /* song9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song9.mp3; sourceTree = "<group>"; };
-		AC2000062F53B00000000006 /* song10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song10.mp3; sourceTree = "<group>"; };
-		AC2000072F53B00000000007 /* song13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song13.mp3; sourceTree = "<group>"; };
 		842C8EEC2F5392AF002FBC1E /* song4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song4.mp3; sourceTree = "<group>"; };
 		AA0000022F53A00000000001 /* SongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongModel.swift; sourceTree = "<group>"; };
 		AA0000042F53A00000000002 /* FavoritesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesManager.swift; sourceTree = "<group>"; };
@@ -136,6 +137,21 @@
 		AA0000082F53A00000000004 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		AB0000022F53A00000000005 /* LibraryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryManager.swift; sourceTree = "<group>"; };
 		AB0000042F53A00000000006 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		AC2000012F53B00000000001 /* song5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song5.mp3; sourceTree = "<group>"; };
+		AC2000022F53B00000000002 /* song6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song6.mp3; sourceTree = "<group>"; };
+		AC2000032F53B00000000003 /* song7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song7.mp3; sourceTree = "<group>"; };
+		AC2000042F53B00000000004 /* song8.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song8.mp3; sourceTree = "<group>"; };
+		AC2000052F53B00000000005 /* song9.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song9.mp3; sourceTree = "<group>"; };
+		AC2000062F53B00000000006 /* song10.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song10.mp3; sourceTree = "<group>"; };
+		AC2000072F53B00000000007 /* song13.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song13.mp3; sourceTree = "<group>"; };
+		AD2000012F53C00000000001 /* LandingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewModel.swift; sourceTree = "<group>"; };
+		AD2000022F53C00000000002 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		AD2000032F53C00000000003 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		AD2000042F53C00000000004 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		AD2000052F53C00000000005 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		AD2000062F53C00000000006 /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
+		AD2000072F53C00000000007 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		AD2000082F53C00000000008 /* HomePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePlaylistViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +217,38 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		40DDA6AF2B022F50009B1F57 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				40469C482B0F622400AF1EA9 /* LocationModel.swift */,
+				40469C4A2B0F626000AF1EA9 /* CurrentWeatherModel.swift */,
+				40469C4C2B0F62A900AF1EA9 /* WeatherResponseModel.swift */,
+				AA0000022F53A00000000001 /* SongModel.swift */,
+				40929EA42B134EB90078524D /* ConditionModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		40DDA6B02B022F51009B1F57 /* Songs */ = {
+			isa = PBXGroup;
+			children = (
+				40F27BC52B14B2980042D2F3 /* song1.mp3 */,
+				40F27BC72B14B2990042D2F3 /* song2.mp3 */,
+				40F27BC92B14B29A0042D2F3 /* song3.mp3 */,
+				842C8EEC2F5392AF002FBC1E /* song4.mp3 */,
+				AC2000012F53B00000000001 /* song5.mp3 */,
+				AC2000022F53B00000000002 /* song6.mp3 */,
+				AC2000032F53B00000000003 /* song7.mp3 */,
+				AC2000042F53B00000000004 /* song8.mp3 */,
+				AC2000052F53B00000000005 /* song9.mp3 */,
+				AC2000062F53B00000000006 /* song10.mp3 */,
+				404F12D82B148C3600DDD0F5 /* song11.mp3 */,
+				404F12DA2B148C3600DDD0F5 /* song12.mp3 */,
+				AC2000072F53B00000000007 /* song13.mp3 */,
+			);
+			path = Songs;
+			sourceTree = "<group>";
+		};
 		40EF73ED2B009B5E00EA61DA = {
 			isa = PBXGroup;
 			children = (
@@ -224,32 +272,17 @@
 		40EF73F82B009B5E00EA61DA /* ClimaBeats */ = {
 			isa = PBXGroup;
 			children = (
-				40F27BC52B14B2980042D2F3 /* song1.mp3 */,
-				40F27BC72B14B2990042D2F3 /* song2.mp3 */,
-				40F27BC92B14B29A0042D2F3 /* song3.mp3 */,
-				842C8EEC2F5392AF002FBC1E /* song4.mp3 */,
-				AC2000012F53B00000000001 /* song5.mp3 */,
-				AC2000022F53B00000000002 /* song6.mp3 */,
-				AC2000032F53B00000000003 /* song7.mp3 */,
-				AC2000042F53B00000000004 /* song8.mp3 */,
-				AC2000052F53B00000000005 /* song9.mp3 */,
-				AC2000062F53B00000000006 /* song10.mp3 */,
-				404F12D82B148C3600DDD0F5 /* song11.mp3 */,
-				404F12DA2B148C3600DDD0F5 /* song12.mp3 */,
-				AC2000072F53B00000000007 /* song13.mp3 */,
+				40DDA6B02B022F51009B1F57 /* Songs */,
 				40DDA6AA2B0219F5009B1F57 /* Helpers */,
-				40EF74682B00A35600EA61DA /* ViewController */,
+				40DDA6AF2B022F50009B1F57 /* Model */,
+				AD3000012F53C00000000001 /* ViewModel */,
+				40EF74682B00A35600EA61DA /* View */,
 				40EF73FF2B009B5E00EA61DA /* Main.storyboard */,
-				40469C482B0F622400AF1EA9 /* LocationModel.swift */,
-				40469C4A2B0F626000AF1EA9 /* CurrentWeatherModel.swift */,
-				40469C4C2B0F62A900AF1EA9 /* WeatherResponseModel.swift */,
-				AA0000022F53A00000000001 /* SongModel.swift */,
 				40EF74292B00A08300EA61DA /* GoogleService-Info.plist */,
 				40EF73F92B009B5E00EA61DA /* ClimaBeats.swift */,
 				40EF74022B009B6100EA61DA /* Assets.xcassets */,
 				40EF74042B009B6100EA61DA /* LaunchScreen.storyboard */,
 				40EF74072B009B6100EA61DA /* Info.plist */,
-				40929EA42B134EB90078524D /* ConditionModel.swift */,
 			);
 			path = ClimaBeats;
 			sourceTree = "<group>";
@@ -271,7 +304,7 @@
 			path = ClimaBeatsUITests;
 			sourceTree = "<group>";
 		};
-		40EF74682B00A35600EA61DA /* ViewController */ = {
+		40EF74682B00A35600EA61DA /* View */ = {
 			isa = PBXGroup;
 			children = (
 				40EF73FD2B009B5E00EA61DA /* LandingView.swift */,
@@ -284,7 +317,22 @@
 				AB0000042F53A00000000006 /* LibraryView.swift */,
 				40EF74642B00A31C00EA61DA /* LoginView.swift */,
 			);
-			path = ViewController;
+			path = View;
+			sourceTree = "<group>";
+		};
+		AD3000012F53C00000000001 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				AD2000012F53C00000000001 /* LandingViewModel.swift */,
+				AD2000022F53C00000000002 /* LoginViewModel.swift */,
+				AD2000032F53C00000000003 /* SignUpViewModel.swift */,
+				AD2000042F53C00000000004 /* WeatherViewModel.swift */,
+				AD2000052F53C00000000005 /* FavoritesViewModel.swift */,
+				AD2000062F53C00000000006 /* LibraryViewModel.swift */,
+				AD2000072F53C00000000007 /* ProfileViewModel.swift */,
+				AD2000082F53C00000000008 /* HomePlaylistViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -464,14 +512,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD1000042F53C00000000004 /* WeatherViewModel.swift in Sources */,
+				AD1000032F53C00000000003 /* SignUpViewModel.swift in Sources */,
 				40EF73FE2B009B5E00EA61DA /* LandingView.swift in Sources */,
+				AD1000012F53C00000000001 /* LandingViewModel.swift in Sources */,
+				AD1000072F53C00000000007 /* ProfileViewModel.swift in Sources */,
 				AB0000012F53A00000000005 /* LibraryManager.swift in Sources */,
+				AD1000062F53C00000000006 /* LibraryViewModel.swift in Sources */,
 				40469C4B2B0F626000AF1EA9 /* CurrentWeatherModel.swift in Sources */,
 				40469C472B0F5BB100AF1EA9 /* WeatherView.swift in Sources */,
 				40EF73FA2B009B5E00EA61DA /* ClimaBeats.swift in Sources */,
 				40EF74632B00A30100EA61DA /* SignUpView.swift in Sources */,
+				AD1000052F53C00000000005 /* FavoritesViewModel.swift in Sources */,
 				40DDA6AC2B021A22009B1F57 /* Storyboard.swift in Sources */,
 				40EF74652B00A31C00EA61DA /* LoginView.swift in Sources */,
+				AD1000082F53C00000000008 /* HomePlaylistViewModel.swift in Sources */,
+				AD1000022F53C00000000002 /* LoginViewModel.swift in Sources */,
 				400D092D2B04D5D800A9E7E6 /* PlayerView.swift in Sources */,
 				40929EA52B134EB90078524D /* ConditionModel.swift in Sources */,
 				40DDA6AE2B022F4F009B1F57 /* Utilities.swift in Sources */,

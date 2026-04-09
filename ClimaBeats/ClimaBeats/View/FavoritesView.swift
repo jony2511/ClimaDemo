@@ -8,6 +8,8 @@
 import UIKit
 
 class FavoritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    private let viewModel = FavoritesViewModel()
     
     private let tableView: UITableView = {
         let table = UITableView()
@@ -64,7 +66,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func fetchFavorites() {
-        FavoritesManager.shared.fetchFavorites { [weak self] songs in
+        viewModel.fetchFavorites { [weak self] songs in
             self?.favoriteSongs = songs
             self?.tableView.reloadData()
             self?.emptyLabel.isHidden = !songs.isEmpty
@@ -116,7 +118,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let song = favoriteSongs[indexPath.row]
-            FavoritesManager.shared.removeFavorite(song: song) { [weak self] success in
+            viewModel.removeFavorite(song: song) { [weak self] success in
                 if success {
                     self?.favoriteSongs.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .fade)

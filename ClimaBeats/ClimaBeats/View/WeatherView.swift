@@ -22,6 +22,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet var conditionLabel: UILabel!
     var fullWeatherData: WeatherData?
+    private let viewModel = WeatherViewModel()
     
     let locationManager = CLLocationManager()
     private let geocoder = CLGeocoder()
@@ -101,52 +102,32 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     }
    
     private func fetchData(for query: String) {
-        var components = URLComponents(string: "https://api.weatherapi.com/v1/current.json")
-        components?.queryItems = [
-            URLQueryItem(name: "key", value: "61af11bba9124212baf85419232611"),
-            URLQueryItem(name: "q", value: query),
-            URLQueryItem(name: "aqi", value: "no")
-        ]
+            viewModel.fetchWeather(query: query) { [weak self] result in
+                guard let self else { return }
 
-        guard let url = components?.url else {
-            print("Error creating weather API URL")
-            return
-        }
+                switch result {
+                case .success(let weatherData):
+                    self.fullWeatherData = weatherData
 
-        let dataTask = URLSession.shared.dataTask(with: url, completionHandler: {
-            (data, response, error) in
-            guard let data = data, error == nil else
-            {
-                print("Error fetching weather data")
-                return
-            }
-            do
-            {
-                self.fullWeatherData = try JSONDecoder().decode(WeatherData.self, from: data)
-            }
-            catch
-            {
-                print("Error decoding weather data: \(error.localizedDescription)")
-            }
-            
-            DispatchQueue.main.async {
-                if let weatherData = self.fullWeatherData {
-                    self.updatetimeLabel.text = "\(weatherData.current.last_updated)"
-                    self.regionLabel.text = "\(weatherData.location.region)"
-                    self.countryLabel.text = "\(weatherData.location.country)"
-                    self.conditionLabel.text = "\(weatherData.current.condition.text)"
-                    self.temperatureLabel.text = "\(weatherData.current.temp_c)°C"
-                    self.humidityLabel.text = "Humidity : \(weatherData.current.humidity)"
-                    self.windLabel.text = "\(weatherData.current.wind_kph) Km/Hr"
-                    if let iconURL = URL(string: "https:\(weatherData.current.condition.icon)") {
-                        if let imageData = try? Data(contentsOf: iconURL) {
-                            self.imageview.image = UIImage(data: imageData)
+                    DispatchQueue.main.async {
+                        self.updatetimeLabel.text = "\(weatherData.current.last_updated)"
+                        self.regionLabel.text = "\(weatherData.location.region)"
+                        self.countryLabel.text = "\(weatherData.location.country)"
+                        self.conditionLabel.text = "\(weatherData.current.condition.text)"
+                        self.temperatureLabel.text = "\(weatherData.current.temp_c)°C"
+                        self.humidityLabel.text = "Humidity : \(weatherData.current.humidity)"
+                        self.windLabel.text = "\(weatherData.current.wind_kph) Km/Hr"
+                        if let iconURL = URL(string: "https:\(weatherData.current.condition.icon)") {
+                            if let imageData = try? Data(contentsOf: iconURL) {
+                                self.imageview.image = UIImage(data: imageData)
+                            }
                         }
                     }
+
+                case .failure(let error):
+                    print("Error fetching weather data: \(error.localizedDescription)")
                 }
             }
-        })
-        dataTask.resume()
     }
 
     @IBAction func refreshData(_ sender: Any) {

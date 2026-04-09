@@ -6,9 +6,10 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class LogInViewController: UIViewController {
+
+    private let viewModel = LoginViewModel()
 
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -56,18 +57,16 @@ class LogInViewController: UIViewController {
         let password = passwordTextField.text!.trimmingCharacters(in:.whitespacesAndNewlines)
         
         //Signing in the user
-        Auth.auth().signIn(withEmail: email, password: password) {(result, error)
-            in
-            if error != nil {
-                self.errorLabel.text = error!.localizedDescription
-                self.errorLabel.alpha = 1
-            }
-            else
-            {
-                let weatherViewController =   self.storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.weatherViewController) as? WeatherViewController
-                
+        viewModel.signIn(email: email, password: password) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success:
+                let weatherViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.weatherViewController) as? WeatherViewController
                 self.view.window?.rootViewController = weatherViewController
                 self.view.window?.makeKeyAndVisible()
+            case .failure(let error):
+                self.errorLabel.text = error.localizedDescription
+                self.errorLabel.alpha = 1
             }
         }
     }

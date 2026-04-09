@@ -6,13 +6,10 @@
 //
 
 import UIKit
-import FirebaseAuth
-import Firebase
-import FirebaseFirestore
-import FirebaseCore
-import FirebaseAnalytics
 
 class SignUpViewController: UIViewController {
+
+    private let viewModel = SignUpViewModel()
 
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -52,17 +49,12 @@ class SignUpViewController: UIViewController {
     }
     */
     func validateFields() -> String? {
-        if firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" || passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            return "Please fill in all fields"
-        }
-        
-        let cleanedPassword = passwordTextField.text!.trimmingCharacters(in:.whitespacesAndNewlines)
-        if Utilities.isPasswordValid(cleanedPassword) == false {
-            return "Please make sure your password is atleast 8 characters, contains a special character and a digit"
-        }
-        
-        
-        return nil
+        return viewModel.validateFields(
+            firstName: firstNameTextField.text ?? "",
+            lastName: lastNameTextField.text ?? "",
+            email: emailTextField.text ?? "",
+            password: passwordTextField.text ?? ""
+        )
     }
 
     @IBAction func signUpTapped(_ sender: Any) {
@@ -78,21 +70,13 @@ class SignUpViewController: UIViewController {
             let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             
-            Auth.auth().createUser(withEmail: email, password: password) {  (result, err) in
-                if err != nil {
-                    self.showError("Error creating user")
-                }
-                else
-                {
-                    let db = Firestore.firestore()
-                    db.collection("users").addDocument(data: ["firstname":firstName, "lastname":lastName, "uid": result!.user.uid ]) {(error) in
-                        if error != nil {
-                            self.showError("Error saving user data")
-                        }
-                    }
+            viewModel.signUp(firstName: firstName, lastName: lastName, email: email, password: password) { [weak self] errorMessage in
+                guard let self else { return }
+                if let errorMessage {
+                    self.showError(errorMessage)
+                } else {
                     self.transitionToHome()
                 }
-                
             }
             
         }

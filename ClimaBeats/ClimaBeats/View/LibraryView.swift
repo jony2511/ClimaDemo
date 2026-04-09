@@ -8,6 +8,8 @@ import UniformTypeIdentifiers
 
 class LibraryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIDocumentPickerDelegate {
 
+    private let viewModel = LibraryViewModel()
+
     private let tableView: UITableView = {
         let table = UITableView()
         table.register(UITableViewCell.self, forCellReuseIdentifier: "libraryCell")
@@ -70,7 +72,7 @@ class LibraryViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
 
     private func reloadSongs() {
-        songs = LibraryManager.shared.fetchSongs()
+        songs = viewModel.fetchSongs()
         tableView.reloadData()
         emptyLabel.isHidden = !songs.isEmpty
         tableView.isHidden = songs.isEmpty
@@ -96,7 +98,7 @@ class LibraryViewController: UIViewController, UITableViewDelegate, UITableViewD
         for url in urls {
             let access = url.startAccessingSecurityScopedResource()
             group.enter()
-            LibraryManager.shared.importSong(from: url) { result in
+            viewModel.importSong(from: url) { result in
                 if case .failure = result {
                     hasFailure = true
                 }
@@ -158,7 +160,7 @@ class LibraryViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let song = songs[indexPath.row]
-            let didDelete = LibraryManager.shared.deleteSong(song)
+            let didDelete = viewModel.deleteSong(song)
 
             if didDelete {
                 songs.remove(at: indexPath.row)

@@ -5,9 +5,10 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class ViewController: UIViewController {
+
+    private let viewModel = LandingViewModel()
     
     @IBOutlet weak var bgimg: UIImageView!
     @IBOutlet weak var signUpButton: UIButton!
@@ -25,7 +26,7 @@ class ViewController: UIViewController {
         super.viewDidAppear(animated)
         
         // Auto-login: Check if user is already signed in
-        if Auth.auth().currentUser != nil {
+        if viewModel.isUserLoggedIn {
             let weatherViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.weatherViewController) as? WeatherViewController
             view.window?.rootViewController = weatherViewController
             view.window?.makeKeyAndVisible()
