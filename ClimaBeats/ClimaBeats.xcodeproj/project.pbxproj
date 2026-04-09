@@ -81,6 +81,7 @@
 		AD1000062F53C00000000006 /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000062F53C00000000006 /* LibraryViewModel.swift */; };
 		AD1000072F53C00000000007 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000072F53C00000000007 /* ProfileViewModel.swift */; };
 		AD1000082F53C00000000008 /* HomePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000082F53C00000000008 /* HomePlaylistViewModel.swift */; };
+		AE1000012F53D00000000001 /* SwiftUIFeatureViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2000012F53D00000000001 /* SwiftUIFeatureViews.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +153,7 @@
 		AD2000062F53C00000000006 /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
 		AD2000072F53C00000000007 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		AD2000082F53C00000000008 /* HomePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePlaylistViewModel.swift; sourceTree = "<group>"; };
+		AE2000012F53D00000000001 /* SwiftUIFeatureViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIFeatureViews.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,6 +312,7 @@
 				40EF73FD2B009B5E00EA61DA /* LandingView.swift */,
 				40EF74622B00A30100EA61DA /* SignUpView.swift */,
 				40EF74662B00A32C00EA61DA /* HomeView.swift */,
+				AE2000012F53D00000000001 /* SwiftUIFeatureViews.swift */,
 				400D092C2B04D5D800A9E7E6 /* PlayerView.swift */,
 				40469C462B0F5BB100AF1EA9 /* WeatherView.swift */,
 				AA0000062F53A00000000003 /* FavoritesView.swift */,
@@ -512,6 +515,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE1000012F53D00000000001 /* SwiftUIFeatureViews.swift in Sources */,
 				AD1000042F53C00000000004 /* WeatherViewModel.swift in Sources */,
 				AD1000032F53C00000000003 /* SignUpViewModel.swift in Sources */,
 				40EF73FE2B009B5E00EA61DA /* LandingView.swift in Sources */,

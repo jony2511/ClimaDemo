@@ -5,6 +5,7 @@
 //  
 
 import UIKit
+import SwiftUI
 import FirebaseAuth
 
 class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
@@ -68,66 +69,66 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
     // ☀️ Energetic - Sunny/Clear
     func configureSongsEnergetic(){
-        songs.append(Song(name: "Ninth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song9"))
-        songs.append(Song(name: "Tenth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song10"))
-        songs.append(Song(name: "Eleventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song11"))
-        songs.append(Song(name: "Fourth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song4"))
-        songs.append(Song(name: "Fifth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song5"))
-        songs.append(Song(name: "Sixth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song6"))
-        songs.append(Song(name: "Seventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song7"))
-        songs.append(Song(name: "Eighth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song8"))
+        songs.append(Song(name: "Ninth Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song9"))
+        songs.append(Song(name: "Tenth Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song10"))
+        songs.append(Song(name: "Eleventh Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song11"))
+        songs.append(Song(name: "Fourth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song4"))
+        songs.append(Song(name: "Fifth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song5"))
+        songs.append(Song(name: "Sixth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song6"))
+        songs.append(Song(name: "Seventh Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song7"))
+        songs.append(Song(name: "Eighth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song8"))
     }
     
     // 🌤️ Chill - Partly Cloudy/Cloudy/Overcast
     func configureSongsChill(){
-        songs.append(Song(name: "Fourth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song4"))
-        songs.append(Song(name: "Ninth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song9"))
-        songs.append(Song(name: "Tenth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song10"))
-        songs.append(Song(name: "Eleventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song11"))
-        songs.append(Song(name: "Twelfth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song12"))
-        songs.append(Song(name: "First Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song1"))
-        songs.append(Song(name: "Third Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song3"))
+        songs.append(Song(name: "Fourth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song4"))
+        songs.append(Song(name: "Ninth Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song9"))
+        songs.append(Song(name: "Tenth Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song10"))
+        songs.append(Song(name: "Eleventh Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song11"))
+        songs.append(Song(name: "Twelfth Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song12"))
+        songs.append(Song(name: "First Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song1"))
+        songs.append(Song(name: "Third Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song3"))
     }
     
     // 🌧️ Melancholic - Rain/Drizzle/Sleet
     func configureSongsMelancholic(){
-        songs.append(Song(name: "Ninth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song9"))
-        songs.append(Song(name: "Tenth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song10"))
-        songs.append(Song(name: "Eleventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song11"))
-        songs.append(Song(name: "Twelfth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song12"))
-        songs.append(Song(name: "Second Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song2"))
-        songs.append(Song(name: "Fourth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song4"))
-        songs.append(Song(name: "Fifth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song5"))
+        songs.append(Song(name: "Ninth Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song9"))
+        songs.append(Song(name: "Tenth Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song10"))
+        songs.append(Song(name: "Eleventh Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song11"))
+        songs.append(Song(name: "Twelfth Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song12"))
+        songs.append(Song(name: "Second Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song2"))
+        songs.append(Song(name: "Fourth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song4"))
+        songs.append(Song(name: "Fifth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song5"))
     }
     
     // ⛈️ Intense - Thunderstorm/Heavy Rain
     func configureSongsIntense(){
-        songs.append(Song(name: "Sixth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song6"))
-        songs.append(Song(name: "Seventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song7"))
-        songs.append(Song(name: "Tenth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song10"))
-        songs.append(Song(name: "Fifth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song5"))
-        songs.append(Song(name: "Fifth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song5"))
-        songs.append(Song(name: "Fourth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song4"))
+        songs.append(Song(name: "Sixth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song6"))
+        songs.append(Song(name: "Seventh Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song7"))
+        songs.append(Song(name: "Tenth Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song10"))
+        songs.append(Song(name: "Fifth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song5"))
+        songs.append(Song(name: "Fifth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song5"))
+        songs.append(Song(name: "Fourth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song4"))
     }
     
     // ❄️ Cozy - Snow/Blizzard/Ice/Freezing
     func configureSongsCozy(){
-        songs.append(Song(name: "First Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song1"))
-        songs.append(Song(name: "Third Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song3"))
-        songs.append(Song(name: "Eighth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song8"))
-        songs.append(Song(name: "Seventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song7"))
-        songs.append(Song(name: "Eleventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song11"))
-        songs.append(Song(name: "Twelfth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song12"))
+        songs.append(Song(name: "First Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song1"))
+        songs.append(Song(name: "Third Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song3"))
+        songs.append(Song(name: "Eighth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song8"))
+        songs.append(Song(name: "Seventh Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song7"))
+        songs.append(Song(name: "Eleventh Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song11"))
+        songs.append(Song(name: "Twelfth Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song12"))
     }
     
     // 🌫️ Mysterious - Fog/Mist/Haze
     func configureSongsMysterious(){
-        songs.append(Song(name: "Eighth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song8"))
-        songs.append(Song(name: "Seventh Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song7"))
-        songs.append(Song(name: "Sixth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song6"))
-        songs.append(Song(name: "Second Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song2"))
-        songs.append(Song(name: "Ninth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song9"))
-        songs.append(Song(name: "Tenth Song", albumName:"", artistName: "", imageName: "song_cover", trackName: "song10"))
+        songs.append(Song(name: "Eighth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song8"))
+        songs.append(Song(name: "Seventh Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song7"))
+        songs.append(Song(name: "Sixth Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song6"))
+        songs.append(Song(name: "Second Song", albumName:"Album 1", artistName: "", imageName: "song_cover", trackName: "song2"))
+        songs.append(Song(name: "Ninth Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song9"))
+        songs.append(Song(name: "Tenth Song", albumName:"Album 2", artistName: "", imageName: "song_cover", trackName: "song10"))
     }
 
     //Table
@@ -188,9 +189,9 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     @objc func favoritesTapped() {
-        let favVC = FavoritesViewController()
-        favVC.modalPresentationStyle = .fullScreen
-        present(favVC, animated: true)
+        let hostingController = UIHostingController(rootView: FavoritesHostView())
+        hostingController.modalPresentationStyle = .fullScreen
+        present(hostingController, animated: true)
     }
 
     @objc func libraryTapped() {
@@ -283,9 +284,9 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     @objc func profileTapped() {
-        let profileVC = ProfileViewController()
-        profileVC.modalPresentationStyle = .fullScreen
-        present(profileVC, animated: true)
+        let hostingController = UIHostingController(rootView: ProfileHostView())
+        hostingController.modalPresentationStyle = .fullScreen
+        present(hostingController, animated: true)
     }
     
     func transitionToHome() {
