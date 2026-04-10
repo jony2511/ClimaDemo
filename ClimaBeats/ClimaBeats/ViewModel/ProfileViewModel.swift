@@ -33,17 +33,77 @@ final class ProfileViewModel {
         }
     }
 
-    func resetPassword(completion: @escaping (Result<String, Error>) -> Void) {
-        guard let email = Auth.auth().currentUser?.email else {
-            completion(.failure(NSError(domain: "Profile", code: 0, userInfo: [NSLocalizedDescriptionKey: "No logged in user email found"])))
+    func updateFullName(_ fullName: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let trimmed = fullName.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard !trimmed.isEmpty else {
+            completion(.failure(NSError(domain: "Profile", code: 0, userInfo: [NSLocalizedDescriptionKey: "Name cannot be empty"])))
             return
         }
 
-        Auth.auth().sendPasswordReset(withEmail: email) { error in
+        guard let user = Auth.auth().currentUser else {
+            completion(.failure(NSError(domain: "Profile", code: 0, userInfo: [NSLocalizedDescriptionKey: "No logged in user found"])))
+            return
+        }
+
+        let nameParts = trimmed.split(separator: " ", omittingEmptySubsequences: true)
+        let firstName = nameParts.first.map(String.init) ?? trimmed
+        let lastName = nameParts.dropFirst().joined(separator: " ")
+
+        let changeRequest = user.createProfileChangeRequest()
+        changeRequest.displayName = trimmed
+
+        changeRequest.commitChanges { [weak self] error in
             if let error {
                 completion(.failure(error))
             } else {
-                completion(.success(email))
+                self?.updateFirestoreName(
+                    uid: user.uid,
+                    email: user.email ?? "",
+                    firstName: firstName,
+                    lastName: lastName,
+                    completion: completion
+                )
+            }
+        }
+    }
+
+    private func updateFirestoreName(
+        uid: String,
+        email: String,
+        firstName: String,
+        lastName: String,
+        completion: @escaping (Result<String, Error>) -> Void
+    ) {
+        db.collection("users").whereField("uid", isEqualTo: uid).getDocuments { [weak self] snapshot, error in
+            if let error {
+                completion(.failure(error))
+                return
+            }
+
+            let data: [String: Any] = [
+                "firstname": firstName,
+                "lastname": lastName,
+                "uid": uid,
+                "email": email
+            ]
+
+            if let document = snapshot?.documents.first {
+                document.reference.updateData(data) { updateError in
+                    if let updateError {
+                        completion(.failure(updateError))
+                    } else {
+                        completion(.success("\(firstName) \(lastName)".trimmingCharacters(in: .whitespaces)))
+                    }
+                }
+            } else {
+                self?.db.collection("users").addDocument(data: data) { createError in
+                    if let createError {
+                        completion(.failure(createError))
+                    } else {
+                        completion(.success("\(firstName) \(lastName)".trimmingCharacters(in: .whitespaces)))
+                    }
+                }
             }
         }
     }

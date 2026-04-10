@@ -42,6 +42,14 @@ class ProfileViewController: UIViewController {
         label.textColor = .darkGray
         return label
     }()
+
+    private let nameTextField: UITextField = {
+        let field = UITextField()
+        field.borderStyle = .roundedRect
+        field.placeholder = "Update name"
+        field.autocapitalizationType = .words
+        return field
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,16 +101,18 @@ class ProfileViewController: UIViewController {
         favCountLabel.frame = CGRect(x: 20, y: 340, width: screenWidth - 40, height: 30)
         view.addSubview(favCountLabel)
         
-        // Change Password button
-        let changePasswordButton = UIButton(type: .system)
-        changePasswordButton.setTitle("🔑 Reset Password", for: .normal)
-        changePasswordButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 16)
-        changePasswordButton.tintColor = .white
-        changePasswordButton.backgroundColor = UIColor(red: 30/255, green: 10/255, blue: 87/255, alpha: 1)
-        changePasswordButton.layer.cornerRadius = 25
-        changePasswordButton.frame = CGRect(x: 40, y: 400, width: screenWidth - 80, height: 50)
-        changePasswordButton.addTarget(self, action: #selector(resetPasswordTapped), for: .touchUpInside)
-        view.addSubview(changePasswordButton)
+        nameTextField.frame = CGRect(x: 40, y: 390, width: screenWidth - 80, height: 44)
+        view.addSubview(nameTextField)
+
+        let updateNameButton = UIButton(type: .system)
+        updateNameButton.setTitle("Update Name", for: .normal)
+        updateNameButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 16)
+        updateNameButton.tintColor = .white
+        updateNameButton.backgroundColor = UIColor(red: 30/255, green: 10/255, blue: 87/255, alpha: 1)
+        updateNameButton.layer.cornerRadius = 25
+        updateNameButton.frame = CGRect(x: 40, y: 445, width: screenWidth - 80, height: 50)
+        updateNameButton.addTarget(self, action: #selector(updateNameTapped), for: .touchUpInside)
+        view.addSubview(updateNameButton)
         
         // Logout button
         let logoutButton = UIButton(type: .system)
@@ -112,7 +122,7 @@ class ProfileViewController: UIViewController {
         logoutButton.layer.borderWidth = 2
         logoutButton.layer.borderColor = UIColor.red.cgColor
         logoutButton.layer.cornerRadius = 25
-        logoutButton.frame = CGRect(x: 40, y: 470, width: screenWidth - 80, height: 50)
+        logoutButton.frame = CGRect(x: 40, y: 510, width: screenWidth - 80, height: 50)
         logoutButton.addTarget(self, action: #selector(logoutTapped), for: .touchUpInside)
         view.addSubview(logoutButton)
 
@@ -145,7 +155,9 @@ class ProfileViewController: UIViewController {
     func loadUserData() {
         viewModel.loadProfile { [weak self] profile in
             self?.emailLabel.text = profile.email
-            self?.nameLabel.text = profile.fullName.isEmpty ? "User" : profile.fullName
+            let resolvedName = profile.fullName.isEmpty ? "User" : profile.fullName
+            self?.nameLabel.text = resolvedName
+            self?.nameTextField.text = resolvedName
         }
     }
     
@@ -155,14 +167,16 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    @objc func resetPasswordTapped() {
-        viewModel.resetPassword { [weak self] result in
+    @objc func updateNameTapped() {
+        viewModel.updateFullName(nameTextField.text ?? "") { [weak self] result in
             let alert: UIAlertController
             switch result {
             case .failure(let error):
                 alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-            case .success(let email):
-                alert = UIAlertController(title: "Success", message: "Password reset email sent to \(email)", preferredStyle: .alert)
+            case .success(let name):
+                self?.nameLabel.text = name
+                self?.nameTextField.text = name
+                alert = UIAlertController(title: "Success", message: "Name updated to \(name)", preferredStyle: .alert)
             }
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             self?.present(alert, animated: true)

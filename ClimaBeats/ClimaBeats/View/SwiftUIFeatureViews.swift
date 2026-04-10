@@ -11,10 +11,36 @@ final class FavoritesSwiftUIViewModel: ObservableObject {
         isLoading = true
         FavoritesManager.shared.fetchFavorites { [weak self] songs in
             DispatchQueue.main.async {
-                self?.songs = songs
+                self?.songs = songs.map { self?.normalizedSong($0) ?? $0 }
                 self?.isLoading = false
             }
         }
+    }
+
+    private func normalizedSong(_ song: Song) -> Song {
+        let trimmedAlbum = song.albumName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let fallbackAlbum = fallbackAlbumName(for: song.trackName)
+        let resolvedAlbum = trimmedAlbum.isEmpty ? fallbackAlbum : trimmedAlbum
+
+        return Song(
+            name: song.name,
+            albumName: resolvedAlbum,
+            artistName: song.artistName,
+            imageName: song.imageName,
+            trackName: song.trackName,
+            localFileName: song.localFileName
+        )
+    }
+
+    private func fallbackAlbumName(for trackName: String) -> String {
+        let key = trackName.lowercased()
+
+        if let numericPart = Int(key.replacingOccurrences(of: "song", with: "")) {
+            if (1...8).contains(numericPart) { return "Album 1" }
+            if (9...12).contains(numericPart) { return "Album 2" }
+        }
+
+        return "Unknown Album"
     }
 
     func removeFavorite(at offsets: IndexSet) {
@@ -48,14 +74,18 @@ struct FavoritesDisplayOptionsView: View {
     }
 }
 
+private struct FavoritePlayerSelection: Identifiable {
+    let id: String
+    let index: Int
+}
+
 struct FavoritesSwiftUIView: View {
     @ObservedObject var viewModel: FavoritesSwiftUIViewModel
     let showBackButton: Bool
 
     @Environment(\.dismiss) private var dismiss
     @State private var showAlbumName = true
-    @State private var selectedIndex: Int?
-    @State private var showPlayer = false
+    @State private var playerSelection: FavoritePlayerSelection?
 
     var body: some View {
         VStack(spacing: 0) {
@@ -77,8 +107,10 @@ struct FavoritesSwiftUIView: View {
                 List {
                     ForEach(Array(viewModel.songs.enumerated()), id: \.offset) { index, song in
                         Button {
-                            selectedIndex = index
-                            showPlayer = true
+                            playerSelection = FavoritePlayerSelection(
+                                id: "\(song.name)_\(song.trackName)_\(index)",
+                                index: index
+                            )
                         } label: {
                             HStack(spacing: 12) {
                                 Image(song.imageName)
@@ -92,11 +124,11 @@ struct FavoritesSwiftUIView: View {
                                         .font(.headline)
                                         .foregroundColor(.primary)
                                     if showAlbumName {
-                                        Text("\(song.artistName) • \(song.albumName)")
+                                        Text(favoritesSubtitle(for: song))
                                             .font(.subheadline)
                                             .foregroundColor(.secondary)
                                     } else {
-                                        Text(song.artistName)
+                                        Text(favoritesArtistText(for: song))
                                             .font(.subheadline)
                                             .foregroundColor(.secondary)
                                     }
@@ -124,12 +156,33 @@ struct FavoritesSwiftUIView: View {
         .onAppear {
             viewModel.fetchFavorites()
         }
-        .fullScreenCover(isPresented: $showPlayer) {
-            if let selectedIndex, viewModel.songs.indices.contains(selectedIndex) {
-                PlayerViewControllerRepresentable(songs: viewModel.songs, position: selectedIndex)
+        .fullScreenCover(item: $playerSelection) { selection in
+            if viewModel.songs.indices.contains(selection.index) {
+                PlayerViewControllerRepresentable(songs: viewModel.songs, position: selection.index)
                     .ignoresSafeArea()
+            } else {
+                Text("Selected song is unavailable.")
+                    .font(.headline)
+                    .padding()
             }
         }
+    }
+
+    private func favoritesSubtitle(for song: Song) -> String {
+        let artist = song.artistName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let album = song.albumName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let components = [artist, album].filter { !$0.isEmpty }
+
+        if components.isEmpty {
+            return "Unknown Artist • Unknown Album"
+        }
+
+        return components.joined(separator: " • ")
+    }
+
+    private func favoritesArtistText(for song: Song) -> String {
+        let artist = song.artistName.trimmingCharacters(in: .whitespacesAndNewlines)
+        return artist.isEmpty ? "Unknown Artist" : artist
     }
 }
 
@@ -139,6 +192,7 @@ final class ProfileSwiftUIViewModel: ObservableObject {
     @Published var fullName = "Loading..."
     @Published var email = ""
     @Published var favoriteCount = 0
+    @Published var editableName = ""
 
     private let profileViewModel = ProfileViewModel()
 
@@ -146,6 +200,7 @@ final class ProfileSwiftUIViewModel: ObservableObject {
         profileViewModel.loadProfile { [weak self] profile in
             DispatchQueue.main.async {
                 self?.fullName = profile.fullName.isEmpty ? "User" : profile.fullName
+                self?.editableName = self?.fullName ?? ""
                 self?.email = profile.email
             }
         }
@@ -157,12 +212,14 @@ final class ProfileSwiftUIViewModel: ObservableObject {
         }
     }
 
-    func resetPassword(completion: @escaping (String, String) -> Void) {
-        profileViewModel.resetPassword { result in
+    func updateName(completion: @escaping (String, String) -> Void) {
+        profileViewModel.updateFullName(editableName) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let email):
-                    completion("Success", "Password reset email sent to \(email)")
+                case .success(let updatedName):
+                    self?.fullName = updatedName
+                    self?.editableName = updatedName
+                    completion("Success", "Name updated to \(updatedName)")
                 case .failure(let error):
                     completion("Error", error.localizedDescription)
                 }
@@ -187,13 +244,13 @@ struct ProfileHostView: View {
 struct ProfileActionButtonsView: View {
     @Binding var showLibrary: Bool
 
-    let onResetPassword: () -> Void
+    let onUpdateName: () -> Void
     let onLogout: () -> Void
 
     var body: some View {
         VStack(spacing: 12) {
-            Button(action: onResetPassword) {
-                Text("Reset Password")
+            Button(action: onUpdateName) {
+                Text("Update Name")
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
@@ -257,6 +314,14 @@ struct ProfileSwiftUIView: View {
                         .font(.title2)
                         .fontWeight(.bold)
 
+                    TextField("Update name", text: $profileViewModel.editableName)
+                        .textInputAutocapitalization(.words)
+                        .disableAutocorrection(true)
+                        .padding(.horizontal, 12)
+                        .frame(height: 44)
+                        .background(Color(.secondarySystemBackground))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+
                     Text(profileViewModel.email)
                         .foregroundColor(.secondary)
 
@@ -279,7 +344,7 @@ struct ProfileSwiftUIView: View {
 
                     ProfileActionButtonsView(
                         showLibrary: $showLibrary,
-                        onResetPassword: resetPassword,
+                        onUpdateName: updateName,
                         onLogout: logout
                     )
                 }
@@ -305,8 +370,8 @@ struct ProfileSwiftUIView: View {
         .navigationViewStyle(StackNavigationViewStyle())
     }
 
-    private func resetPassword() {
-        profileViewModel.resetPassword { title, message in
+    private func updateName() {
+        profileViewModel.updateName { title, message in
             alertTitle = title
             alertMessage = message
             showAlert = true
@@ -340,7 +405,22 @@ struct PlayerViewControllerRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         guard let vc = storyboard.instantiateViewController(withIdentifier: "player") as? PlayerViewController else {
-            return UIViewController()
+            let fallback = UIViewController()
+            fallback.view.backgroundColor = .systemBackground
+
+            let label = UILabel()
+            label.text = "Unable to open player."
+            label.textAlignment = .center
+            label.textColor = .secondaryLabel
+            label.translatesAutoresizingMaskIntoConstraints = false
+
+            fallback.view.addSubview(label)
+            NSLayoutConstraint.activate([
+                label.centerXAnchor.constraint(equalTo: fallback.view.centerXAnchor),
+                label.centerYAnchor.constraint(equalTo: fallback.view.centerYAnchor)
+            ])
+
+            return fallback
         }
 
         vc.songs = songs

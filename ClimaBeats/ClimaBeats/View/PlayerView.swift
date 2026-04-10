@@ -69,6 +69,7 @@ class PlayerViewController: UIViewController, AVAudioPlayerDelegate {
     let progressSlider = UISlider()
     let elapsedTimeLabel = UILabel()
     let remainingTimeLabel = UILabel()
+    private let closeButton = UIButton(type: .system)
     var isFavorited = false
     
     override func viewDidLoad() {
@@ -114,6 +115,8 @@ class PlayerViewController: UIViewController, AVAudioPlayerDelegate {
         
         // ====== UI LAYOUT ======
         let holderWidth = holder.frame.size.width
+
+        configureCloseButton()
         
         // Album cover
         let imageSize = holderWidth - 40
@@ -233,6 +236,25 @@ class PlayerViewController: UIViewController, AVAudioPlayerDelegate {
         slider.value = 0.5
         slider.addTarget(self, action: #selector(didSliderSlider(_:)), for: .valueChanged)
         holder.addSubview(slider)
+    }
+
+    private func configureCloseButton() {
+        closeButton.removeFromSuperview()
+
+        closeButton.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        closeButton.setTitle(" Back", for: .normal)
+        closeButton.tintColor = UIColor(red: 30/255, green: 10/255, blue: 87/255, alpha: 1)
+        closeButton.titleLabel?.font = UIFont(name: "Helvetica", size: 17)
+        closeButton.contentHorizontalAlignment = .left
+        closeButton.addTarget(self, action: #selector(didTapClose), for: .touchUpInside)
+
+        let topInset = view.safeAreaInsets.top
+        closeButton.frame = CGRect(x: 12, y: topInset + 8, width: 100, height: 34)
+        view.addSubview(closeButton)
+    }
+
+    @objc private func didTapClose() {
+        dismiss(animated: true)
     }
 
     private func resolvePlaybackURL(for song: Song) -> URL? {
