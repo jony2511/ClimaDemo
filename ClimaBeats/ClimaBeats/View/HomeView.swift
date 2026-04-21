@@ -63,6 +63,14 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         profileButton.frame = CGRect(x: view.frame.size.width - 110, y: 50, width: 100, height: 35)
         profileButton.addTarget(self, action: #selector(profileTapped), for: .touchUpInside)
         view.addSubview(profileButton)
+
+        let roomsButton = UIButton(type: .system)
+        roomsButton.setTitle("Rooms", for: .normal)
+        roomsButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 14)
+        roomsButton.tintColor = UIColor(red: 30/255, green: 10/255, blue: 87/255, alpha: 1)
+        roomsButton.frame = CGRect(x: 12, y: 50, width: 100, height: 35)
+        roomsButton.addTarget(self, action: #selector(roomsTapped), for: .touchUpInside)
+        view.addSubview(roomsButton)
     }
     
     // MARK: - Phase 7: Expanded Weather-to-Mood Playlists
@@ -268,23 +276,32 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     private func loadPlaylistForCurrentMode() {
         viewModel.loadPlaylist { [weak self] loadedSongs in
             self?.songs = loadedSongs
+            self?.viewModel.cacheCurrentPlaylist(loadedSongs)
             self?.table.reloadData()
         }
     }
 
     private func saveCurrentModePlaylist() {
         viewModel.savePlaylist(songs)
+        viewModel.cacheCurrentPlaylist(songs)
     }
 
     private func resetCurrentModePlaylistToDefault() {
         viewModel.resetPlaylist { [weak self] defaultSongs in
             self?.songs = defaultSongs
+            self?.viewModel.cacheCurrentPlaylist(defaultSongs)
             self?.table.reloadData()
         }
     }
     
     @objc func profileTapped() {
         let hostingController = UIHostingController(rootView: ProfileHostView())
+        hostingController.modalPresentationStyle = .fullScreen
+        present(hostingController, animated: true)
+    }
+
+    @objc func roomsTapped() {
+        let hostingController = UIHostingController(rootView: RoomAccessHostView())
         hostingController.modalPresentationStyle = .fullScreen
         present(hostingController, animated: true)
     }

@@ -5,6 +5,7 @@ import FirebaseFirestore
 final class HomePlaylistViewModel {
     private let db = Firestore.firestore()
     private(set) var currentModeKey: String = "chill"
+    private let currentPlaylistCacheKey = "home.currentPlaylist.cache"
 
     func updateMode(from conditionText: String) {
         currentModeKey = modeKey(for: conditionText)
@@ -160,4 +161,56 @@ final class HomePlaylistViewModel {
                 }
             }
     }
+
+    func cacheCurrentPlaylist(_ songs: [Song]) {
+        let payload = songs.map { song in
+            CachedSong(
+                name: song.name,
+                albumName: song.albumName,
+                artistName: song.artistName,
+                imageName: song.imageName,
+                trackName: song.trackName,
+                localFileName: song.localFileName
+            )
+        }
+
+        do {
+            let data = try JSONEncoder().encode(payload)
+            UserDefaults.standard.set(data, forKey: currentPlaylistCacheKey)
+        } catch {
+            print("Error caching current playlist: \(error.localizedDescription)")
+        }
+    }
+
+    func fetchCachedCurrentPlaylist() -> [Song] {
+        guard let data = UserDefaults.standard.data(forKey: currentPlaylistCacheKey) else {
+            return []
+        }
+
+        do {
+            let records = try JSONDecoder().decode([CachedSong].self, from: data)
+            return records.map {
+                Song(
+                    name: $0.name,
+                    albumName: $0.albumName,
+                    artistName: $0.artistName,
+                    imageName: $0.imageName,
+                    trackName: $0.trackName,
+                    localFileName: $0.localFileName
+                )
+            }
+        } catch {
+            print("Error reading cached current playlist: \(error.localizedDescription)")
+            return []
+        }
+    }
+}
+
+private struct CachedSong: Codable {
+    let name: String
+    let albumName: String
+    let artistName: String
+    let imageName: String
+    let trackName: String
+    let localFileName: String?
 }

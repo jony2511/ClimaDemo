@@ -82,6 +82,20 @@
 		AD1000072F53C00000000007 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000072F53C00000000007 /* ProfileViewModel.swift */; };
 		AD1000082F53C00000000008 /* HomePlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD2000082F53C00000000008 /* HomePlaylistViewModel.swift */; };
 		AE1000012F53D00000000001 /* SwiftUIFeatureViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE2000012F53D00000000001 /* SwiftUIFeatureViews.swift */; };
+		AF1000012F54000000000001 /* RoomsDomainModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2000012F54000000000001 /* RoomsDomainModels.swift */; };
+		AF1000022F54000000000002 /* RoomsDomainErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2000022F54000000000002 /* RoomsDomainErrors.swift */; };
+		AF1000032F54000000000003 /* RoomsDomainProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2000032F54000000000003 /* RoomsDomainProtocols.swift */; };
+		AF1000042F54000000000004 /* FirestoreRoomRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2000042F54000000000004 /* FirestoreRoomRepository.swift */; };
+		AF1000052F54000000000005 /* RoomSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2000052F54000000000005 /* RoomSessionViewModel.swift */; };
+		AF1000062F54000000000006 /* RoomsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2000062F54000000000006 /* RoomsCoordinator.swift */; };
+		AF1000072F54000000000007 /* FirestoreRoomRealtimeSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2000072F54000000000007 /* FirestoreRoomRealtimeSync.swift */; };
+		AF1000082F54000000000008 /* DefaultRoomPlaybackSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2000082F54000000000008 /* DefaultRoomPlaybackSync.swift */; };
+		AF1000092F54100000000009 /* RoomLifecycleUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2000092F54100000000009 /* RoomLifecycleUseCase.swift */; };
+		AF10000A2F5410000000000A /* RoomObservationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF20000A2F5410000000000A /* RoomObservationUseCase.swift */; };
+		AF10000B2F5410000000000B /* RoomInteractionUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF20000B2F5410000000000B /* RoomInteractionUseCase.swift */; };
+		AF10000C2F5420000000000C /* RoomAccessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF20000C2F5420000000000C /* RoomAccessViewModel.swift */; };
+		AF10000D2F5420000000000D /* RoomAccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF20000D2F5420000000000D /* RoomAccessView.swift */; };
+		AF10000E2F5430000000000E /* RoomSessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF20000E2F5430000000000E /* RoomSessionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +168,20 @@
 		AD2000072F53C00000000007 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		AD2000082F53C00000000008 /* HomePlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePlaylistViewModel.swift; sourceTree = "<group>"; };
 		AE2000012F53D00000000001 /* SwiftUIFeatureViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIFeatureViews.swift; sourceTree = "<group>"; };
+		AF2000012F54000000000001 /* RoomsDomainModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsDomainModels.swift; sourceTree = "<group>"; };
+		AF2000022F54000000000002 /* RoomsDomainErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsDomainErrors.swift; sourceTree = "<group>"; };
+		AF2000032F54000000000003 /* RoomsDomainProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsDomainProtocols.swift; sourceTree = "<group>"; };
+		AF2000042F54000000000004 /* FirestoreRoomRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRoomRepository.swift; sourceTree = "<group>"; };
+		AF2000052F54000000000005 /* RoomSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomSessionViewModel.swift; sourceTree = "<group>"; };
+		AF2000062F54000000000006 /* RoomsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsCoordinator.swift; sourceTree = "<group>"; };
+		AF2000072F54000000000007 /* FirestoreRoomRealtimeSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreRoomRealtimeSync.swift; sourceTree = "<group>"; };
+		AF2000082F54000000000008 /* DefaultRoomPlaybackSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRoomPlaybackSync.swift; sourceTree = "<group>"; };
+		AF2000092F54100000000009 /* RoomLifecycleUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomLifecycleUseCase.swift; sourceTree = "<group>"; };
+		AF20000A2F5410000000000A /* RoomObservationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomObservationUseCase.swift; sourceTree = "<group>"; };
+		AF20000B2F5410000000000B /* RoomInteractionUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomInteractionUseCase.swift; sourceTree = "<group>"; };
+		AF20000C2F5420000000000C /* RoomAccessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomAccessViewModel.swift; sourceTree = "<group>"; };
+		AF20000D2F5420000000000D /* RoomAccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomAccessView.swift; sourceTree = "<group>"; };
+		AF20000E2F5430000000000E /* RoomSessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomSessionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +302,7 @@
 		40EF73F82B009B5E00EA61DA /* ClimaBeats */ = {
 			isa = PBXGroup;
 			children = (
+				AF3000012F54000000000001 /* Features */,
 				40DDA6B02B022F51009B1F57 /* Songs */,
 				40DDA6AA2B0219F5009B1F57 /* Helpers */,
 				40DDA6AF2B022F50009B1F57 /* Model */,
@@ -336,6 +365,75 @@
 				AD2000082F53C00000000008 /* HomePlaylistViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		AF3000012F54000000000001 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				AF3000022F54000000000002 /* Rooms */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		AF3000022F54000000000002 /* Rooms */ = {
+			isa = PBXGroup;
+			children = (
+				AF3000072F54100000000007 /* Application */,
+				AF3000032F54000000000003 /* Domain */,
+				AF3000042F54000000000004 /* Data */,
+				AF3000052F54000000000005 /* Presentation */,
+				AF3000062F54000000000006 /* Navigation */,
+			);
+			path = Rooms;
+			sourceTree = "<group>";
+		};
+		AF3000032F54000000000003 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				AF2000012F54000000000001 /* RoomsDomainModels.swift */,
+				AF2000022F54000000000002 /* RoomsDomainErrors.swift */,
+				AF2000032F54000000000003 /* RoomsDomainProtocols.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		AF3000042F54000000000004 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				AF2000082F54000000000008 /* DefaultRoomPlaybackSync.swift */,
+				AF2000042F54000000000004 /* FirestoreRoomRepository.swift */,
+				AF2000072F54000000000007 /* FirestoreRoomRealtimeSync.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		AF3000052F54000000000005 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				AF20000D2F5420000000000D /* RoomAccessView.swift */,
+				AF20000C2F5420000000000C /* RoomAccessViewModel.swift */,
+				AF20000E2F5430000000000E /* RoomSessionView.swift */,
+				AF2000052F54000000000005 /* RoomSessionViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		AF3000062F54000000000006 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				AF2000062F54000000000006 /* RoomsCoordinator.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		AF3000072F54100000000007 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				AF2000092F54100000000009 /* RoomLifecycleUseCase.swift */,
+				AF20000A2F5410000000000A /* RoomObservationUseCase.swift */,
+				AF20000B2F5410000000000B /* RoomInteractionUseCase.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -515,6 +613,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF10000E2F5430000000000E /* RoomSessionView.swift in Sources */,
+				AF10000D2F5420000000000D /* RoomAccessView.swift in Sources */,
+				AF10000C2F5420000000000C /* RoomAccessViewModel.swift in Sources */,
+				AF10000B2F5410000000000B /* RoomInteractionUseCase.swift in Sources */,
+				AF10000A2F5410000000000A /* RoomObservationUseCase.swift in Sources */,
+				AF1000092F54100000000009 /* RoomLifecycleUseCase.swift in Sources */,
+				AF1000082F54000000000008 /* DefaultRoomPlaybackSync.swift in Sources */,
+				AF1000072F54000000000007 /* FirestoreRoomRealtimeSync.swift in Sources */,
+				AF1000062F54000000000006 /* RoomsCoordinator.swift in Sources */,
+				AF1000052F54000000000005 /* RoomSessionViewModel.swift in Sources */,
+				AF1000042F54000000000004 /* FirestoreRoomRepository.swift in Sources */,
+				AF1000032F54000000000003 /* RoomsDomainProtocols.swift in Sources */,
+				AF1000022F54000000000002 /* RoomsDomainErrors.swift in Sources */,
+				AF1000012F54000000000001 /* RoomsDomainModels.swift in Sources */,
 				AE1000012F53D00000000001 /* SwiftUIFeatureViews.swift in Sources */,
 				AD1000042F53C00000000004 /* WeatherViewModel.swift in Sources */,
 				AD1000032F53C00000000003 /* SignUpViewModel.swift in Sources */,
